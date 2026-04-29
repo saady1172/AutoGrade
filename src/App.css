@@ -1,0 +1,114 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.dark-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  background: #111;
+  color: white;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.app {
+  background: white;
+  color: black;
+  min-height: 100vh;
+}
+
+.dark {
+  background: #121212;
+  color: white;
+}
+
+.dark input,
+.dark textarea {
+  background-color: #1e1e1e;
+  color: white;
+  border: 1px solid #444;
+}
+
+.dark .blue-btn {
+  background: #2563eb;
+}
+
+.dark .white-btn {
+  background: #1e1e1e;
+  color: white;
+  border: 1px solid #555;
+}
+
+.dark .score-box {
+  color: black;
+}
+
+.dark .title {
+  color: #e0e0e0;
+}
+
+.dark .label {
+  color: #aaaaaa;
+}
+
+.dark .model-box {
+  background: #1a2a3a;
+  border-left: 5px solid #2563eb;
+}
+
+.dark .model-title {
+  color: #60a5fa;
+}
+
+.dark .model-text {
+  color: #d1d5db;
+}
+
+.dark .suggestions-box {
+  background: #1a1a2e;
+  border-left: 4px solid #2563eb;
+}
+
+.dark .suggestion-item {
+  color: #d1d5db;
+  border-bottom: 1px solid #2a2a4a;
+}
+
+.dark .score-label {
+  color: #222;
+}
