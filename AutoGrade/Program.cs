@@ -23,7 +23,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
-builder.Services.AddScoped<AIGradingService>();
+builder.Services.AddHttpClient<AIGradingService>();
 
 var app = builder.Build();
 

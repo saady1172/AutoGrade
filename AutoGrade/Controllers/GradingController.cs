@@ -22,7 +22,7 @@ namespace AutoGrade.Controllers
         [HttpPost("grade")]
         public async Task<IActionResult> GradeAnswer([FromBody] GradeRequest request)
         {
-            var result = _aiService.GradeAnswer(request);
+            var result = await _aiService.GradeAnswerAsync(request);
 
             var submission = new Submission
             {
