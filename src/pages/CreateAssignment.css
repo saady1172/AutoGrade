@@ -1,0 +1,115 @@
+.ca-container {
+  max-width: 600px;
+  margin: 60px auto;
+  padding: 0 20px;
+  font-family: Arial, sans-serif;
+}
+
+.ca-logo {
+  color: #1a3d7c;
+  font-size: 28px;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.ca-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
+}
+
+.ca-title {
+  font-size: 20px;
+  color: #333;
+  margin: 0 0 24px 0;
+}
+
+.ca-input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  margin-bottom: 14px;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.ca-input:focus {
+  border-color: #1a73e8;
+}
+
+.ca-textarea {
+  width: 100%;
+  height: 130px;
+  padding: 12px 14px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  margin-bottom: 14px;
+  resize: none;
+  box-sizing: border-box;
+  outline: none;
+  font-family: Arial, sans-serif;
+}
+
+.ca-textarea:focus {
+  border-color: #1a73e8;
+}
+
+.ca-error {
+  color: #c90707;
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+.ca-btn-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.ca-submit-btn {
+  flex: 1;
+  background: #1a73e8;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.ca-submit-btn:hover:not(:disabled) {
+  background: #1558c0;
+}
+
+.ca-submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.ca-back-btn {
+  flex: 1;
+  background: none;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 15px;
+  cursor: pointer;
+  color: #555;
+}
+
+.ca-back-btn:hover {
+  background: #f5f5f5;
+}
+
+.ca-deadline-label {
+  display: block;
+  font-size: 13px;
+  color: #888;
+  margin-bottom: 6px;
+}

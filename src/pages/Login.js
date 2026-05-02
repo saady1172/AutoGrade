@@ -33,7 +33,7 @@ export default function Login({ onLogin, setPage }) {
         return;
       }
 
-      onLogin({ email: data.email, role: data.role, name: data.name });
+      onLogin({ email: data.email, role: data.role, name: data.name, grade: data.grade });
     } catch (err) {
       setError("Cannot connect to server. Make sure the backend is running.");
     } finally {

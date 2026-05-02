@@ -10,6 +10,9 @@ namespace AutoGrade.Models
         public string ModelAnswer { get; set; } = string.Empty;
         public int Score { get; set; }
         public string Feedback { get; set; } = string.Empty;
+        public string Suggestions { get; set; } = string.Empty;
+        public string StudentGrade { get; set; } = string.Empty;
+        public int? AssignmentId { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     }
 }

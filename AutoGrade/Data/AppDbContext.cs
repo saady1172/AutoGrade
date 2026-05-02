@@ -9,6 +9,7 @@ namespace AutoGrade.Data
 
         public DbSet<User> Users { get; set; }
         public DbSet<Submission> Submissions { get; set; }
+        public DbSet<Assignment> Assignments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

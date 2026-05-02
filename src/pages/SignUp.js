@@ -7,6 +7,7 @@ export default function SignUp({ setPage }) {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("");
+  const [grade, setGrade] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
@@ -16,6 +17,11 @@ export default function SignUp({ setPage }) {
   const handleSignUp = async () => {
     if (!fullName.trim() || !email.trim() || !role || !password.trim() || !confirmPassword.trim()) {
       setError("All fields are required");
+      return;
+    }
+
+    if (role === "student" && !grade) {
+      setError("Please select your grade");
       return;
     }
 
@@ -36,7 +42,7 @@ export default function SignUp({ setPage }) {
       const res = await fetch(`${API}/api/auth/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ fullName, email, password, role }),
+        body: JSON.stringify({ fullName, email, password, role, grade: role === "student" ? grade : null }),
       });
 
       const data = await res.json();
@@ -80,11 +86,20 @@ export default function SignUp({ setPage }) {
           onChange={(e) => setEmail(e.target.value)}
         />
 
-        <select value={role} onChange={(e) => setRole(e.target.value)}>
+        <select value={role} onChange={(e) => { setRole(e.target.value); setGrade(""); }}>
           <option value="">Choose Role</option>
           <option value="student">Student</option>
           <option value="teacher">Teacher</option>
         </select>
+
+        {role === "student" && (
+          <select value={grade} onChange={(e) => setGrade(e.target.value)}>
+            <option value="">Select Grade</option>
+            {Array.from({ length: 12 }, (_, i) => (
+              <option key={i + 1} value={`Grade ${i + 1}`}>Grade {i + 1}</option>
+            ))}
+          </select>
+        )}
 
         <input
           type="password"

@@ -39,7 +39,8 @@ namespace AutoGrade.Controllers
             {
                 FullName = req.FullName,
                 Email = req.Email,
-                Role = role
+                Role = role,
+                Grade = role == "student" ? req.Grade : null
             };
             user.PasswordHash = _hasher.HashPassword(user, req.Password);
 
@@ -82,7 +83,8 @@ namespace AutoGrade.Controllers
                 message = "Login successful",
                 name = user.FullName,
                 email = user.Email,
-                role = user.Role
+                role = user.Role,
+                grade = user.Grade
             });
         }
     }
