@@ -59,6 +59,16 @@ namespace AutoGrade.Controllers
             return Ok(users);
         }
 
+        [HttpGet("enrollment")]
+        public async Task<IActionResult> GetEnrollment()
+        {
+            var students = await _db.Users.Where(u => u.Role == "student").ToListAsync();
+            var byGrade = students
+                .GroupBy(u => u.Grade ?? "Unknown")
+                .ToDictionary(g => g.Key, g => g.Count());
+            return Ok(new { total = students.Count, byGrade });
+        }
+
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest req)
         {

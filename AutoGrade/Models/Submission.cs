@@ -13,6 +13,7 @@ namespace AutoGrade.Models
         public string Suggestions { get; set; } = string.Empty;
         public string StudentGrade { get; set; } = string.Empty;
         public int? AssignmentId { get; set; }
+        public int? AssignmentQuestionId { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     }
 }

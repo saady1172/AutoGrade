@@ -10,12 +10,19 @@ namespace AutoGrade.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Submission> Submissions { get; set; }
         public DbSet<Assignment> Assignments { get; set; }
+        public DbSet<AssignmentQuestion> AssignmentQuestions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>()
                 .HasIndex(u => u.Email)
                 .IsUnique();
+
+            modelBuilder.Entity<AssignmentQuestion>()
+                .HasOne<Assignment>()
+                .WithMany(a => a.Questions)
+                .HasForeignKey(q => q.AssignmentId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

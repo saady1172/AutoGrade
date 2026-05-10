@@ -299,3 +299,139 @@
   background: #ffb3b3;
   color: #c90707;
 }
+
+/* PDF download button */
+.sd-pdf-btn {
+  width: 100%;
+  background: none;
+  border: 1px solid #1a73e8;
+  color: #1a73e8;
+  border-radius: 8px;
+  padding: 11px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 16px;
+}
+
+.sd-pdf-btn:hover {
+  background: #eef4ff;
+}
+
+/* Result view — PDF above, View Grades below */
+.sd-result-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.sd-result-actions .sd-submit-btn {
+  margin-top: 0;
+}
+
+/* Score trend chart */
+.sd-trend-box {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.sd-trend-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 10px 0;
+}
+
+/* Progress bar */
+.sd-progress-section {
+  margin-bottom: 20px;
+}
+
+.sd-progress-header {
+  margin-bottom: 6px;
+}
+
+.sd-progress-text {
+  font-size: 13px;
+  color: #555;
+  font-weight: 600;
+}
+
+.sd-progress-track {
+  width: 100%;
+  height: 8px;
+  background: #e5e7eb;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.sd-progress-fill {
+  height: 100%;
+  background: #1a73e8;
+  border-radius: 4px;
+  transition: width 0.4s ease;
+  min-width: 0;
+}
+
+/* Average score row */
+.sd-avg-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 14px 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.sd-avg-label {
+  font-size: 14px;
+  color: #555;
+  font-weight: 600;
+}
+
+.sd-avg-score {
+  font-size: 18px;
+  font-weight: bold;
+  padding: 6px 16px;
+  border-radius: 8px;
+}
+
+/* Multi-question blocks */
+.sd-question-block {
+  border-top: 1px solid #e5e7eb;
+  margin-top: 20px;
+  padding-top: 16px;
+}
+
+.sd-question-num {
+  font-size: 13px;
+  font-weight: 700;
+  color: #1a73e8;
+  margin: 0 0 8px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.sd-q-score-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 8px 0;
+}
+
+.sd-score-pill-sm {
+  font-size: 14px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 8px;
+}

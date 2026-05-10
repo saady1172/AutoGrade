@@ -17,18 +17,42 @@ namespace AutoGrade.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateAssignment([FromBody] Assignment assignment)
+        public async Task<IActionResult> CreateAssignment([FromBody] CreateAssignmentRequest request)
         {
-            assignment.CreatedAt = DateTime.UtcNow;
+            var assignment = new Assignment
+            {
+                Subject = request.Subject,
+                Grade = request.Grade,
+                Deadline = request.Deadline,
+                CreatedAt = DateTime.UtcNow
+            };
             _db.Assignments.Add(assignment);
             await _db.SaveChangesAsync();
-            return Ok(assignment);
+
+            for (int i = 0; i < request.Questions.Count; i++)
+            {
+                _db.AssignmentQuestions.Add(new AssignmentQuestion
+                {
+                    AssignmentId = assignment.Id,
+                    QuestionText = request.Questions[i].QuestionText,
+                    ModelAnswer = request.Questions[i].ModelAnswer,
+                    OrderIndex = i
+                });
+            }
+            await _db.SaveChangesAsync();
+
+            var created = await _db.Assignments
+                .Include(a => a.Questions.OrderBy(q => q.OrderIndex))
+                .FirstAsync(a => a.Id == assignment.Id);
+            return Ok(created);
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAssignments([FromQuery] string? grade = null)
         {
-            var query = _db.Assignments.AsQueryable();
+            var query = _db.Assignments
+                .Include(a => a.Questions.OrderBy(q => q.OrderIndex))
+                .AsQueryable();
             if (!string.IsNullOrEmpty(grade))
                 query = query.Where(a => a.Grade == grade);
             var assignments = await query.OrderByDescending(a => a.CreatedAt).ToListAsync();
@@ -60,6 +84,7 @@ namespace AutoGrade.Controllers
             var submitted = await _db.Submissions
                 .Where(s => s.AssignmentId == id)
                 .Select(s => s.StudentName.ToLower())
+                .Distinct()
                 .ToListAsync();
 
             var missing = students

@@ -431,3 +431,279 @@
   color: #888;
   margin-bottom: 6px;
 }
+
+/* Question block inside quiz detail view */
+.td-q-block {
+  border-top: 1px solid #e5e7eb;
+  margin-top: 22px;
+  padding-top: 18px;
+}
+
+.td-q-block-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.td-q-block-num {
+  font-size: 13px;
+  font-weight: 700;
+  color: #1a73e8;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* "3 Qs" badge shown next to score pill in table */
+.td-q-count-badge {
+  display: inline-block;
+  margin-left: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #1a73e8;
+  background: #eef4ff;
+  padding: 2px 7px;
+  border-radius: 10px;
+  vertical-align: middle;
+}
+
+/* Stat cards — 5 cards wrap gracefully */
+.td-stats-row {
+  flex-wrap: wrap;
+}
+
+.td-stat-card {
+  min-width: 130px;
+}
+
+.td-stat-number {
+  font-size: 30px;
+}
+
+.td-stat-card-highlight {
+  border-color: #1a73e8;
+  background: #f0f6ff;
+}
+
+/* Score trend chart */
+.td-chart-section {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 18px 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.td-chart-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #555;
+  margin: 0 0 14px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.td-chart-subtitle {
+  font-weight: 400;
+  color: #888;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.td-chart-box {
+  width: 100%;
+  overflow: hidden;
+}
+
+.td-chart-empty {
+  font-size: 13px;
+  color: #aaa;
+  margin: 0;
+}
+
+/* Top / Bottom performers */
+.td-performers-row {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.td-performers-card {
+  flex: 1;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 16px 18px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.td-performers-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 12px 0;
+}
+
+.td-performer-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.td-performer-item:last-child {
+  border-bottom: none;
+}
+
+.td-performer-name {
+  font-size: 13px;
+  color: #333;
+}
+
+.td-performer-link {
+  cursor: pointer;
+  color: #1a73e8;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.td-performer-link:hover {
+  color: #1558c0;
+}
+
+.td-performer-score {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+
+/* Clickable student name in table */
+.td-student-link {
+  cursor: pointer;
+  color: #1a73e8;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.td-student-link:hover {
+  color: #1558c0;
+}
+
+/* Assignment completion */
+.td-assign-completion {
+  font-size: 12px;
+  color: #555;
+  font-weight: 600;
+}
+
+.td-completion-pct {
+  font-weight: 700;
+}
+
+/* Score distribution */
+.td-dist-section {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 18px 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.td-dist-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #555;
+  margin: 0 0 12px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.td-dist-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.td-dist-label {
+  font-size: 12px;
+  color: #666;
+  width: 48px;
+  flex-shrink: 0;
+  text-align: right;
+}
+
+.td-dist-track {
+  flex: 1;
+  height: 18px;
+  background: #f0f0f0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.td-dist-bar {
+  height: 100%;
+  border-radius: 4px;
+  min-width: 2px;
+  transition: width 0.3s ease;
+}
+
+.td-dist-count {
+  font-size: 13px;
+  font-weight: 600;
+  width: 24px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+/* Toolbar left group */
+.td-toolbar-left {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.td-search-input {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #333;
+  outline: none;
+  width: 180px;
+}
+
+.td-search-input:focus {
+  border-color: #1a73e8;
+}
+
+/* Assignment card extras */
+.td-assign-q-pill {
+  display: inline-block;
+  background: #f0f9f0;
+  color: #15a315;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+.td-assign-bottom {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.td-assign-sub-stats {
+  font-size: 12px;
+  color: #1a73e8;
+  font-weight: 600;
+}

@@ -24,7 +24,7 @@ namespace AutoGrade.Controllers
         {
             var result = await _aiService.GradeAnswerAsync(request);
 
-            var submission = new Submission
+            _db.Submissions.Add(new Submission
             {
                 StudentName = request.StudentName,
                 Subject = request.Subject,
@@ -35,9 +35,7 @@ namespace AutoGrade.Controllers
                 Feedback = result.Feedback,
                 Suggestions = string.Join("|", result.Suggestions),
                 CreatedAt = DateTime.UtcNow
-            };
-
-            _db.Submissions.Add(submission);
+            });
             await _db.SaveChangesAsync();
 
             return Ok(result);
@@ -46,7 +44,10 @@ namespace AutoGrade.Controllers
         [HttpPost("student-submit")]
         public async Task<IActionResult> StudentSubmit([FromBody] StudentSubmitRequest request)
         {
-            var assignment = await _db.Assignments.FindAsync(request.AssignmentId);
+            var assignment = await _db.Assignments
+                .Include(a => a.Questions.OrderBy(q => q.OrderIndex))
+                .FirstOrDefaultAsync(a => a.Id == request.AssignmentId);
+
             if (assignment == null)
                 return NotFound(new { message = "Assignment not found" });
 
@@ -59,36 +60,70 @@ namespace AutoGrade.Controllers
             if (assignment.Deadline.HasValue && DateTime.UtcNow > assignment.Deadline.Value)
                 return BadRequest(new { message = "The deadline for this assignment has passed." });
 
-            var gradeRequest = new GradeRequest
+            var questionResults = new List<object>();
+            var feedbackParts = new List<string>();
+            var allSuggestions = new List<string>();
+            int totalScore = 0;
+            int gradedCount = 0;
+
+            foreach (var answer in request.Answers)
             {
-                StudentName = request.StudentName,
-                Subject = assignment.Subject,
-                Question = assignment.Question,
-                StudentAnswer = request.StudentAnswer,
-                ModelAnswer = assignment.ModelAnswer
-            };
+                var question = assignment.Questions.FirstOrDefault(q => q.Id == answer.QuestionId);
+                if (question == null) continue;
 
-            var result = await _aiService.GradeAnswerAsync(gradeRequest);
+                var gradeRequest = new GradeRequest
+                {
+                    StudentName = request.StudentName,
+                    Subject = assignment.Subject,
+                    Question = question.QuestionText,
+                    StudentAnswer = answer.Answer,
+                    ModelAnswer = question.ModelAnswer
+                };
 
-            var submission = new Submission
-            {
-                StudentName = request.StudentName,
-                Subject = assignment.Subject,
-                Question = assignment.Question,
-                StudentAnswer = request.StudentAnswer,
-                ModelAnswer = assignment.ModelAnswer,
-                Score = result.Grade,
-                Feedback = result.Feedback,
-                Suggestions = string.Join("|", result.Suggestions),
-                StudentGrade = request.StudentGrade,
-                AssignmentId = request.AssignmentId,
-                CreatedAt = DateTime.UtcNow
-            };
+                var result = await _aiService.GradeAnswerAsync(gradeRequest);
 
-            _db.Submissions.Add(submission);
+                _db.Submissions.Add(new Submission
+                {
+                    StudentName = request.StudentName,
+                    Subject = assignment.Subject,
+                    Question = question.QuestionText,
+                    StudentAnswer = answer.Answer,
+                    ModelAnswer = question.ModelAnswer,
+                    Score = result.Grade,
+                    Feedback = result.Feedback,
+                    Suggestions = string.Join("|", result.Suggestions),
+                    StudentGrade = request.StudentGrade,
+                    AssignmentId = request.AssignmentId,
+                    AssignmentQuestionId = question.Id,
+                    CreatedAt = DateTime.UtcNow
+                });
+
+                totalScore += result.Grade;
+                gradedCount++;
+                feedbackParts.Add(result.Feedback);
+                allSuggestions.AddRange(result.Suggestions);
+
+                questionResults.Add(new
+                {
+                    questionId = question.Id,
+                    questionText = question.QuestionText,
+                    grade = result.Grade,
+                    feedback = result.Feedback,
+                    suggestions = result.Suggestions
+                });
+            }
+
             await _db.SaveChangesAsync();
 
-            return Ok(result);
+            int avgScore = gradedCount > 0 ? totalScore / gradedCount : 0;
+
+            return Ok(new
+            {
+                grade = avgScore,
+                feedback = string.Join(" | ", feedbackParts),
+                suggestions = allSuggestions.Distinct().Take(5).ToList(),
+                questions = questionResults
+            });
         }
 
         [HttpGet("submissions")]
